@@ -1,0 +1,1 @@
+from polls.views import index
