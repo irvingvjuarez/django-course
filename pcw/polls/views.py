@@ -21,7 +21,16 @@ def detail(request, question_id):
     })
 
 def results(request, question_id):
-    return HttpResponse(f"Results page of the question #{question_id}")
+    question = Question.objects.get(id=question_id)
+    options = question.choice_set.all()
+    votes = [{"content": opt.content, "votes": opt.votes} for opt in options ]
+
+    return render(request, "polls/results.html", {
+        "id": question.id,
+        "paramId": question_id,
+        "content": question.content,
+        "votes": votes
+    })
 
 def vote(request, question_id):
     return HttpResponse(f"Here you should be able to vote in the question #{question_id}")
