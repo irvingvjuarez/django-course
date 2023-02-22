@@ -1,0 +1,28 @@
+<head>
+    <title>
+        {% if not error_message %}
+            {{ content }}
+        {% else %}
+            Error!
+        {% endif %}
+    </title>
+</head>
+
+<main>
+    <section>
+    {% if not error_message %}
+        <h2>Your response has been added successfully!</h2>
+
+        <div>
+            {{ choice }}
+            <strong>
+                {{ votes }}
+            </strong>
+        </div>
+    {% else %}
+        <span>
+            {{ error_message }}
+        </span>
+    {% endif %}
+    </section>
+</main>

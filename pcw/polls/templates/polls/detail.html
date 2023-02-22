@@ -16,7 +16,7 @@
 
             {% for choice in choices %}
                 <div>
-                    <input type="radio" name="{{ id }}" id="{{ choice.id }}">
+                    <input value="{{ choice.id }}" type="radio" name="choice" id="{{ choice.id }}">
                     <label for="{{ choice.id }}">
                         {{ choice.content }}
                     </label>
@@ -28,4 +28,8 @@
             Submit
         </button>
     </form>
+
+    <a href="{% url 'polls:results' id %}">
+        See Results
+    </a>
 {% endif %}

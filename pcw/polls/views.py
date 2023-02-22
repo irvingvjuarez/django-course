@@ -33,4 +33,20 @@ def results(request, question_id):
     })
 
 def vote(request, question_id):
-    return HttpResponse(f"Here you should be able to vote in the question #{question_id}")
+    question = get_object_or_404(Question, id=question_id)
+
+    try:
+        chosenChoice = question.choice_set.get(id=request.POST["choice"])
+    except:
+        return render(request, "polls/vote.html", {
+            "error_message": "An error has ocurred"
+        })
+    else:
+        chosenChoice.votes += 1
+        chosenChoice.save()
+
+        return render(request, "polls/vote.html", {
+            "content": question.content,
+            "choice": chosenChoice.content,
+            "votes": chosenChoice.votes
+        })
