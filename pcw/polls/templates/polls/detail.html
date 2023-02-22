@@ -1,24 +1,31 @@
-{% if id %}
-    <section>
-        <div>
-            <h2>{{ content }}</h2>
-        </div>
+<head>
+    <title>
+        {{ content }}
+    </title>
+</head>
 
-        <div>
-            <h3>Options</h3>
-            <ul>
-                {% for choice in choices %}
-                    <li>
-                        {{ choice.content }}
-                    </li>
-                {% endfor %}
-            </ul>
-
-            <a href="{% url 'polls:results' id %}">
-                See Results
-            </a>
-        </div>
-    </section>
+{% if error_message %}
+    <span>{{ error_message }}</span>
 {% else %}
-    <span>{{ paramId }} ID not valid</span>
+    <form action="{% url 'polls:vote' id %}" method="POST">
+    {% csrf_token %}
+        <fieldset>
+            <legend>
+                <h2>{{ content }}</h2>
+            </legend>
+
+            {% for choice in choices %}
+                <div>
+                    <input type="radio" name="{{ id }}" id="{{ choice.id }}">
+                    <label for="{{ choice.id }}">
+                        {{ choice.content }}
+                    </label>
+                </div>
+            {% endfor %}
+        </fieldset>
+
+        <button>
+            Submit
+        </button>
+    </form>
 {% endif %}
