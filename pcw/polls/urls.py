@@ -1,4 +1,4 @@
-from . import index, detail, vote, results
+from .views import index, detail, vote, results
 from django.urls import path
 
 urlpatterns = [
