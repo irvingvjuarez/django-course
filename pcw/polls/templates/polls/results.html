@@ -18,7 +18,7 @@
             </ul>
         </div>
 
-        <a href="/polls/{{id}}/vote">Vote</a>
+        <a href="{% url 'polls:vote' id %}">Vote</a>
     </section>
 {% else %}
     <span>{{ paramId }} ID not valid</span>
