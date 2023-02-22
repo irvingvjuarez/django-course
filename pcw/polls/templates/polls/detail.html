@@ -1,0 +1,20 @@
+{% if id %}
+    <section>
+        <div>
+            <h2>{{ content }}</h2>
+        </div>
+
+        <div>
+            <h3>Options</h3>
+            <ul>
+                {% for choice in choices %}
+                    <li>
+                        {{ choice.content }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+{% else %}
+    <span>{{ paramId }} ID not valid</span>
+{% endif %}

@@ -11,7 +11,14 @@ def index(request):
     })
 
 def detail(request, question_id):
-    return HttpResponse(f"You are in the question #{question_id}")
+    question = Question.objects.get(id=question_id)
+
+    return render(request, "polls/detail.html", {
+        "id": question.id,
+        "paramId": question_id,
+        "content": question.content,
+        "choices": question.choice_set.all()
+    })
 
 def results(request, question_id):
     return HttpResponse(f"Results page of the question #{question_id}")
