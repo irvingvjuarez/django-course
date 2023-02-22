@@ -1,1 +1,1 @@
-from polls.views import index
+from polls.views import index, detail, vote, results
