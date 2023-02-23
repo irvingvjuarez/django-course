@@ -1,6 +1,10 @@
 <head>
     <title>
-        {{ content }}
+        {% if error_message %}
+            Error!
+        {% else %}
+            {{ content }}
+        {% endif %}
     </title>
 </head>
 

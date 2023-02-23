@@ -1,5 +1,5 @@
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404, redirect
+# from django.http import HttpResponse, HttpResponseRedirect
 
 from .models import Question
 # Create your views here.
@@ -38,15 +38,11 @@ def vote(request, question_id):
     try:
         chosenChoice = question.choice_set.get(id=request.POST["choice"])
     except:
-        return render(request, "polls/vote.html", {
+        return render(request, "polls/detail.html", {
             "error_message": "An error has ocurred"
         })
     else:
         chosenChoice.votes += 1
         chosenChoice.save()
 
-        return render(request, "polls/vote.html", {
-            "content": question.content,
-            "choice": chosenChoice.content,
-            "votes": chosenChoice.votes
-        })
+        return redirect("polls:results", question.id)
